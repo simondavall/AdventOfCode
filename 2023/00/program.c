@@ -16,7 +16,7 @@ int main(void){
   printf("Part 1 Result: %d\n", part1(lines, line_count));
   printf("Part 2 Result: %d\n", part2(lines, line_count));
 
-  dispose(lines, line_count);
+  dispose_read_file(lines, line_count);
 
   return EXIT_SUCCESS;
 }
