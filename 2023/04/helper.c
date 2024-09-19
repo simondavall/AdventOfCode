@@ -5,6 +5,12 @@
 #include <string.h>
 #include "helper.h"
 
+
+static void terminate(const char *msg){
+  printf("%s\n", msg);
+  exit(EXIT_FAILURE);
+}
+
 // This function reads lines from a specified file into
 // the array provided. After use the dispose_read_file function
 // to free the memory allocated.
@@ -74,16 +80,13 @@ struct split_result split(char *str, const char *delim){
   struct split_result *result = NULL;
   char *token, *item, **arr = NULL, **ins;
   int count = 0;
-
-  // todo: revisit this as the original string is changed during this
-  // function call.
+  
   token = strtok(str, delim);
 
   while(token != NULL){
     count++;
 
     item = NULL; // Needed
-    // todo: This memory is not deallocated
     item = m_alloc(item, strlen(token) + 1, "Unable to allocate memory to item in split");
     strcpy(item, token);
     
