@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "helper.h"
+#define INPUT_FILE "sample"
 
 int part1(char *lines[], int line_count);
 int part2(char *lines[], int line_count);
@@ -8,7 +9,7 @@ int part2(char *lines[], int line_count);
 int main(void){
   char *lines[INIT_LINES_SIZE];
 
-  int line_count = read_file(lines, "sample");
+  int line_count = read_file(lines, INPUT_FILE);
 
   for(int j = 0; j < line_count; j++)
     printf("Line %2d: '%s'\n", j, lines[j]);
