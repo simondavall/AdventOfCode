@@ -40,24 +40,20 @@ int main(void){
 
 int part1(char *lines[], int line_count){
   int i, j, first, last, tally = 0;
+  bool first_set;
 
   for(i = 0; i < line_count; i++){
     j = 0;
+    first_set = false;
     while(lines[i][j] != '\0'){
       if (isdigit(lines[i][j])){
-        first = lines[i][j] - '0';
-        break;
+        if(!first_set){
+          first = lines[i][j] - '0';
+          first_set = true;
+        }
+        last = lines[i][j] - '0';
       }
       j++;
-    }
-
-    j = strlen(lines[i]);
-    while (j >= 0){
-      if (isdigit(lines[i][j])){
-        last = lines[i][j] - '0';
-        break;
-      }
-      j--;
     }
 
     tally += first * 10;
@@ -68,35 +64,27 @@ int part1(char *lines[], int line_count){
 }
 
 int part2(char *lines[], int line_count){
-  int i, j, first_digit, last_digit, tally = 0;
+  int i, j, first, last, tally = 0;
   char line_buffer[MAX_LINE_BUFFER];
+  bool first_set;
 
   for(i = 0; i < line_count; i++){
-    // printf("Orig string: %s\n", lines[i]);
     strcpy(line_buffer, prepare_str(lines[i]));
-    // printf("Prepared string: %s\n", line_buffer);
-
+    first_set = false;
     j = 0;
     while(line_buffer[j] != '\0'){
       if (isdigit(line_buffer[j])){
-        first_digit = line_buffer[j] - '0';
-        break;
+         if(!first_set){
+          first = lines[i][j] - '0';
+          first_set = true;
+        }
+        last = lines[i][j] - '0';
       }
       j++;
     }
 
-    j = strlen(line_buffer);
-    while (j >= 0){
-      if (isdigit(line_buffer[j])){
-        last_digit = line_buffer[j] - '0';
-        break;
-      }
-      j--;
-    }
-
-    // printf("Digits: %d%d\n", first_digit, last_digit);
-    tally += first_digit * 10;
-    tally += last_digit;
+    tally += first * 10;
+    tally += last;
   }
 
   return tally;

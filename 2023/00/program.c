@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "helper.h"
-#define INPUT_FILE "sample"
 
 long part1(char *lines[], int line_count){
 

@@ -341,14 +341,7 @@ long part1(char *map[]){
 
 long part2(){
   int x, y, inside = 0;
-  // enum direction next_dir;
 
-  // find_start(map, &start_x, &start_y);
-  // next_dir = find_valid_neighbour(map, start_x, start_y);
-  // traverse_tunnel(map, start_x, start_y, next_dir);
-
-  // print_array();
-  
   for(x = 0; x < map_width; x++){
     for(y = 0; y < map_height; y++){
       if (is_inside_tunnel(x, y))
@@ -368,7 +361,7 @@ void solve_file(char *file_path){
   map_height = line_count;
 
   tunnel_len = 0;
-  tunnel = NULL;
+  //tunnel = NULL;
 
   // for(int j = 0; j < line_count; j++)
   //   printf("%s\n", map[j]);
