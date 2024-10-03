@@ -16,6 +16,7 @@ struct node {
 
 struct node *cache = NULL;
 
+//Note: Cache key will be the concatinated list of all 'O' coordinates.
 char *create_cache_key(char *grid[]){
   int i, j, buf_len = 0;
 
@@ -197,14 +198,14 @@ long part1(char *lines[]){
 
 long part2(char *lines[]){
   char *key, cache_index;
-  bool found_in_cache = false, use_cache = true;
+  bool found_in_cache = false;
   int step = 1;
   
   int cycles = 1000000000;
   for (int i = 0; i < cycles; i += step){
     cycle(lines);
 
-    if (!found_in_cache & use_cache){
+    if (!found_in_cache){
       key = create_cache_key(lines);
       cache_index = find_in_cache(key);
       if (cache_index > 0){
