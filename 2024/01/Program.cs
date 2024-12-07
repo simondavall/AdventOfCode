@@ -1,12 +1,13 @@
-﻿namespace AOC2024_Day01;
+﻿// ReSharper disable ClassNeverInstantiated.Global
+namespace _01;
 
-class Program
+internal class Program
 {
-    static int Main()
+    private static int Main()
     {
         const string aocDay = "01";
         const string filename = "input.txt";
-        const string path = $"/home/sdv/Documents/Projects/Aoc/2024/{aocDay}/AOC2024-Day{aocDay}/AOC2024-Day{aocDay}/";
+        const string path = $"/home/sdv/Documents/Projects/Aoc/2024/{aocDay}/";
         var lines = File.ReadLines($"{path}{filename}").ToArray();
 
         List<int> firstList = [];
