@@ -14,7 +14,7 @@ internal class Program
 
         Console.WriteLine($"Part 1: {PartOne(reports)}");
 
-        Console.WriteLine($"Part 1: {PartTwo(reports.ToList())}");
+        Console.WriteLine($"Part 2: {PartTwo(reports.ToList())}");
     }
     
     private static long PartOne(string[] reports)

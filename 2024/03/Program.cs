@@ -15,7 +15,7 @@ internal partial class Program
 
         Console.WriteLine($"Part 1: {PartOne(memory)}");
 
-        Console.WriteLine($"Part 1: {PartTwo(memory)}");
+        Console.WriteLine($"Part 2: {PartTwo(memory)}");
     }
 
     private static long PartOne(string memory)

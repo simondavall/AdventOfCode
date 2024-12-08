@@ -22,7 +22,7 @@ internal class Program
 
         Console.WriteLine($"Part 1: {PartOne(firstList, secondList)}");
 
-        Console.WriteLine($"Part 1: {PartTwo(firstList, secondList)}");
+        Console.WriteLine($"Part 2: {PartTwo(firstList, secondList)}");
         return 0;
     }
     
