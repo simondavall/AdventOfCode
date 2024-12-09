@@ -4,4 +4,4 @@ playground
 bin
 obj
 .idea
-
+*.user
