@@ -6,4 +6,5 @@
   <Project Path="05\05.csproj" Type="Classic C#" />
   <Project Path="06\06.csproj" Type="Classic C#" />
   <Project Path="07\07.csproj" Type="Classic C#" />
+  <Project Path="08\08.csproj" Type="Classic C#" />
 </Solution>
