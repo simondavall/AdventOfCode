@@ -10,4 +10,5 @@
   <Project Path="09\09.csproj" Type="Classic C#" />
   <Project Path="10\10.csproj" Type="Classic C#" />
   <Project Path="11\11.csproj" Type="Classic C#" />
+  <Project Path="12\12.csproj" Type="Classic C#" />
 </Solution>
