@@ -11,4 +11,5 @@
   <Project Path="10\10.csproj" Type="Classic C#" />
   <Project Path="11\11.csproj" Type="Classic C#" />
   <Project Path="12\12.csproj" Type="Classic C#" />
+  <Project Path="13\13.csproj" Type="Classic C#" />
 </Solution>
