@@ -19,4 +19,5 @@
   <Project Path="18\18.csproj" Type="Classic C#" />
   <Project Path="19\19.csproj" Type="Classic C#" />
   <Project Path="20\20.csproj" Type="Classic C#" />
+  <Project Path="21\21.csproj" Type="Classic C#" />
 </Solution>
