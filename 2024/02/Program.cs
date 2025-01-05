@@ -7,14 +7,11 @@ internal class Program
 
     internal static void Main()
     {
-        const string aocDay = "02";
-        const string filename = "input.txt";
-        const string path = $"/home/sdv/Documents/Projects/Aoc/2024/{aocDay}/";
-        var reports = File.ReadLines($"{path}{filename}").ToArray();
+        var input = File.ReadAllText("input.txt").Split("\n", StringSplitOptions.RemoveEmptyEntries);
+        
+        Console.WriteLine($"Part 1: {PartOne(input)}");
 
-        Console.WriteLine($"Part 1: {PartOne(reports)}");
-
-        Console.WriteLine($"Part 2: {PartTwo(reports.ToList())}");
+        Console.WriteLine($"Part 2: {PartTwo(input.ToList())}");
     }
     
     private static long PartOne(string[] reports)

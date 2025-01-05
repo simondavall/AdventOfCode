@@ -7,17 +7,14 @@ internal static class Program
     
     internal static void Main()
     {
-        const string aocDay = "22";
-        const string aocYear = "2024";
-        const string path = $"/home/sdv/Documents/Projects/Aoc/{aocYear}/{aocDay}/";
         const string filename = "input.txt";
-        
-        var secretNumbers = File.ReadAllText($"{path}{filename}")
+        var secretNumbers = File.ReadAllText($"{filename}")
             .Split("\n", StringSplitOptions.RemoveEmptyEntries)
             .ToLongArray();
+        
         Console.WriteLine($"Part 1: {PartOne(secretNumbers)}");
         
-        secretNumbers = File.ReadAllText($"{path}{filename}")
+        secretNumbers = File.ReadAllText($"{filename}")
             .Split("\n", StringSplitOptions.RemoveEmptyEntries)
             .ToLongArray();
         Console.WriteLine($"Part 2: {PartTwo(secretNumbers)}");

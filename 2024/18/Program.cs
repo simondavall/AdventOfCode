@@ -13,15 +13,13 @@ internal static class Program
 
     internal static void Main()
     {
-        const string aocDay = "18";
-        const string aocYear = "2024";
-        const string path = $"/home/sdv/Documents/Projects/Aoc/{aocYear}/{aocDay}/";
-
         SetConfig("input.txt");
-        var bytes = File.ReadAllLines($"{path}{_filename}").ToPointArray();
+        var input = File.ReadAllText($"{_filename}")
+            .Split('\n', StringSplitOptions.RemoveEmptyEntries)
+            .ToPointArray();
         
-        Console.WriteLine($"Part 1: {PartOne(bytes)}");
-        Console.WriteLine($"Part 2: {PartTwo(bytes)}");
+        Console.WriteLine($"Part 1: {PartOne(input)}");
+        Console.WriteLine($"Part 2: {PartTwo(input)}");
     }
 
     private static long PartOne(Point[] bytes)

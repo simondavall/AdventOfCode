@@ -6,10 +6,7 @@ internal static class Program
     
     internal static void Main()
     {
-        const string aocDay = "11";
-        const string filename = "input.txt";
-        const string path = $"/home/sdv/Documents/Projects/Aoc/2024/{aocDay}/";
-        var source = File.ReadAllText($"{path}{filename}");
+        var source = File.ReadAllText("input.txt");
         
         Console.WriteLine($"Part 1: {PartOne(source)}");
         Console.WriteLine($"Part 2: {PartTwo(source)}");

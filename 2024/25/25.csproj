@@ -3,11 +3,10 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>net8.0</TargetFramework>
-        <RootNamespace>_21</RootNamespace>
+        <RootNamespace>_25</RootNamespace>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
-
     <ItemGroup>
         <None Update="input.txt">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -16,5 +15,4 @@
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
     </ItemGroup>
-    
 </Project>

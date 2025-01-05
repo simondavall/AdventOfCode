@@ -11,13 +11,8 @@ internal static class Program
     
     internal static void Main()
     {
-        const string aocDay = "17";
-        const string aocYear = "2024";
-        const string path = $"/home/sdv/Documents/Projects/Aoc/{aocYear}/{aocDay}/";
-
-        const string filename = "input.txt";
-        var input = File.ReadAllText($"{path}{filename}").Split("\n\n");
-
+        var input = File.ReadAllText("input.txt").Split("\n\n", StringSplitOptions.RemoveEmptyEntries);
+        
         var registers = input[0].Split('\n');
         var initialRegisters = new long[3];
         for (var i = 0; i < registers.Length; i++)

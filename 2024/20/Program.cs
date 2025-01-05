@@ -19,12 +19,8 @@ internal static class Program
 
     internal static void Main()
     {
-        const string aocDay = "20";
-        const string aocYear = "2024";
-        const string path = $"/home/sdv/Documents/Projects/Aoc/{aocYear}/{aocDay}/";
-        
         SetConfig("input.txt");
-        _map = File.ReadAllText($"{path}{_filename}")
+        _map = File.ReadAllText($"{_filename}")
             .Split('\n', StringSplitOptions.RemoveEmptyEntries)
             .To2DCharArray();
         

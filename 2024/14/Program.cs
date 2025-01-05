@@ -11,15 +11,9 @@ internal static class Program
 
     internal static void Main()
     {
-        // Change this to "input" / "sample" to switch between run types.
-        DataSetup("input");
-        const string aocDay = "14";
-        const string aocYear = "2024";
-        const string path = $"/home/sdv/Documents/Projects/Aoc/{aocYear}/{aocDay}/";
-
-
-        var robotData = File.ReadAllLines($"{path}{_filename}");
-
+        DataSetup("input.txt");
+        var robotData = File.ReadAllText($"{_filename}").Split("\n", StringSplitOptions.RemoveEmptyEntries);
+        
         Console.WriteLine($"Part 1: {PartOne(robotData)}");
         Console.WriteLine($"Part 2: {PartTwo(robotData)}");
     }
@@ -65,7 +59,7 @@ internal static class Program
 
             if (HasUnusualSpread(points) > 300)
             {
-                PrintMap(robots, secs);
+                //PrintMap(robots, secs);
                 return secs;
             }
         }
@@ -114,6 +108,7 @@ internal static class Program
         robot.Position = robot.Position with { X = x, Y = y };
     }
     
+    // ReSharper disable once UnusedMember.Local
     private static void PrintMap(List<Robot> robots, int secs)
     {
         Console.WriteLine($"Map at: {secs} secs");
@@ -143,13 +138,13 @@ internal static class Program
         return new Point(x, y);
     }
     
-    private static void DataSetup(string id)
+    private static void DataSetup(string filename)
     {
-        if (id != "input") return;
+        if (filename != "input.txt") return;
         _mapHeight = 103;
         _mapWidth = 101;
         _map = new int[101,103];
-        _filename = "input.txt";
+        _filename = filename;
     }
     
     private class Robot(Point position, Point velocity)

@@ -12,12 +12,7 @@ internal static class Program
     
     internal static void Main()
     {
-        const string aocDay = "21";
-        const string aocYear = "2024";
-        const string path = $"/home/sdv/Documents/Projects/Aoc/{aocYear}/{aocDay}/";
-
-        const string filename = "input.txt";
-        var codes = File.ReadAllText($"{path}{filename}").Split('\n', StringSplitOptions.RemoveEmptyEntries);
+        var codes = File.ReadAllText("input.txt").Split('\n', StringSplitOptions.RemoveEmptyEntries);
         
         _numberSequences = ComputeSequences(NumericKeypad);
         _directionalSequences = ComputeSequences(DirectionalKeypad);

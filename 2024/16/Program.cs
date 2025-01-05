@@ -15,12 +15,7 @@ internal static class Program
     
     internal static void Main()
     {
-        const string aocDay = "16";
-        const string aocYear = "2024";
-        const string path = $"/home/sdv/Documents/Projects/Aoc/{aocYear}/{aocDay}/";
-
-        const string filename = "input.txt";
-        var map = File.ReadAllLines($"{path}{filename}");
+        var map = File.ReadAllText("input.txt").Split('\n', StringSplitOptions.RemoveEmptyEntries);
         
         _mapHeight = map.Length;
         _mapWidth = map[0].Length;
@@ -165,6 +160,7 @@ internal static class Program
         return new Point(0, 0);
     }
     
+    // ReSharper disable once UnusedMember.Local
     private static void PrintMap(char[,] map, List<Vector> path)
     {
         Console.WriteLine($"Tally {path.Last().Tally}");

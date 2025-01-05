@@ -13,10 +13,7 @@ internal static class Program
     
     internal static void Main()
     {
-        const string aocDay = "06";
-        const string filename = "input.txt";
-        const string path = $"/home/sdv/Documents/Projects/Aoc/2024/{aocDay}/";
-        var map = File.ReadAllLines($"{path}{filename}").ToArray();
+        var map = File.ReadAllText("input.txt").Split("\n", StringSplitOptions.RemoveEmptyEntries);
         
         _mapWidth = map[0].Length;
         _mapHeight = map.Length;

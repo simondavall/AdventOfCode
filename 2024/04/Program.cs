@@ -11,11 +11,8 @@ internal partial class Program
     
     internal static void Main()
     {
-        const string aocDay = "04";
-        const string filename = "input.txt";
-        const string path = $"/home/sdv/Documents/Projects/Aoc/2024/{aocDay}/";
-        _map = File.ReadAllLines($"{path}{filename}").ToArray();
-
+        _map = File.ReadAllText("input.txt").Split("\n", StringSplitOptions.RemoveEmptyEntries);
+        
         _mapWidth = _map[0].Length;
         _mapHeight = _map.Length;
         

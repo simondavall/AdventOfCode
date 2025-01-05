@@ -8,14 +8,10 @@ internal partial class Program
 {
     internal static void Main()
     {
-        const string aocDay = "03";
-        const string filename = "input.txt";
-        const string path = $"/home/sdv/Documents/Projects/Aoc/2024/{aocDay}/";
-        var memory = File.ReadAllText($"{path}{filename}");
-
-        Console.WriteLine($"Part 1: {PartOne(memory)}");
-
-        Console.WriteLine($"Part 2: {PartTwo(memory)}");
+        var input = File.ReadAllText("input.txt");
+        
+        Console.WriteLine($"Part 1: {PartOne(input)}");
+        Console.WriteLine($"Part 2: {PartTwo(input)}");
     }
 
     private static long PartOne(string memory)

@@ -5,16 +5,11 @@ namespace _24;
 internal static class Program
 {
     private static readonly Dictionary<string, int> Wires = [];
-    private static Dictionary<string, (string input1, string input2, string gate)> Connections = [];
+    private static Dictionary<string, (string input1, string input2, string gate)> _connections = [];
     
     internal static void Main()
     {
-        const string aocDay = "24";
-        const string aocYear = "2024";
-        const string path = $"/home/sdv/Documents/Projects/Aoc/{aocYear}/{aocDay}/";
-
-        const string filename = "input.txt";
-        var inputs = File.ReadAllText($"{path}{filename}").Split("\n\n", StringSplitOptions.RemoveEmptyEntries);
+        var inputs = File.ReadAllText($"input.txt").Split("\n\n", StringSplitOptions.RemoveEmptyEntries);
         
         foreach (var wire in inputs[0].Split('\n', StringSplitOptions.RemoveEmptyEntries))
         {
@@ -23,7 +18,7 @@ internal static class Program
         }
         
         var connArray = inputs[1].Split('\n', StringSplitOptions.RemoveEmptyEntries);
-        Connections = connArray
+        _connections = connArray
             .Select(connection => connection.Split(' '))
             .ToDictionary(output => output[4], formula => (formula[0], formula[2], formula[1]));
 
@@ -39,7 +34,7 @@ internal static class Program
         while (true)
         {
             var key = Wire('z', i);
-            if (!Connections.ContainsKey(key))
+            if (!_connections.ContainsKey(key))
                 break;
             zWires.Add(GetOutput(key));
             i++;
@@ -58,13 +53,13 @@ internal static class Program
         {
             var foundSwap = false;
             var errorLine = FindError();
-            foreach (var x in Connections.Keys)
+            foreach (var x in _connections.Keys)
             {
-                foreach (var y in Connections.Keys)
+                foreach (var y in _connections.Keys)
                 {
                     if (x == y)
                         continue;
-                    (Connections[x], Connections[y]) = (Connections[y], Connections[x]);
+                    (_connections[x], _connections[y]) = (_connections[y], _connections[x]);
                     if (FindError() > errorLine)
                     {
                         swappedWires.Add(x);
@@ -72,7 +67,7 @@ internal static class Program
                         foundSwap = true;
                         break;
                     }
-                    (Connections[x], Connections[y]) = (Connections[y], Connections[x]);
+                    (_connections[x], _connections[y]) = (_connections[y], _connections[x]);
                 }
 
                 if (foundSwap)
@@ -91,7 +86,7 @@ internal static class Program
         if (Wires.TryGetValue(wire, out var value))
             return value;
 
-        var (input1, input2, gate) = Connections[wire];
+        var (input1, input2, gate) = _connections[wire];
         Wires[wire] = GetOutput(gate, GetOutput(input1), GetOutput(input2));
 
         return Wires[wire];
@@ -131,7 +126,7 @@ internal static class Program
     
     private static bool CheckZWires(string wire, int n)
     {
-        if (!Connections.TryGetValue(wire, out var value))
+        if (!_connections.TryGetValue(wire, out var value))
             return false;
 
         var (input1, input2, gate) = value;
@@ -146,7 +141,7 @@ internal static class Program
     
     private static bool CheckXor(string wire, int n)
     {
-        if (!Connections.TryGetValue(wire, out var value))
+        if (!_connections.TryGetValue(wire, out var value))
             return false;
         
         var (input1, input2, gate) = value;
@@ -158,7 +153,7 @@ internal static class Program
 
     private static bool CheckCarryBit(string wire, int n)
     {
-        if (!Connections.TryGetValue(wire, out var value))
+        if (!_connections.TryGetValue(wire, out var value))
             return false;
         
         var (input1, input2, gate) = value;
@@ -178,7 +173,7 @@ internal static class Program
 
     private static bool CheckCarry(string wire, int n)
     {
-        if (!Connections.TryGetValue(wire, out var value))
+        if (!_connections.TryGetValue(wire, out var value))
             return false;
         
         var (input1, input2, gate) = value;
@@ -190,7 +185,7 @@ internal static class Program
 
     private static bool CheckCarryOver(string wire, int n)
     {
-        if (!Connections.TryGetValue(wire, out var value))
+        if (!_connections.TryGetValue(wire, out var value))
             return false;
         
         var (input1, input2, gate) = value;

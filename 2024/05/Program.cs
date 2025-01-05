@@ -8,13 +8,10 @@ internal static class Program
     
     internal static void Main()
     {
-        const string aocDay = "05";
-        const string filename = "input.txt";
-        const string path = $"/home/sdv/Documents/Projects/Aoc/2024/{aocDay}/";
-        var file = File.ReadAllText($"{path}{filename}").Split("\n\n");
-
-        var ruleSets = file[0].Split("\n");
-        var updates = file[1].Split("\n", StringSplitOptions.RemoveEmptyEntries);
+        var input = File.ReadAllText("input.txt").Split("\n\n", StringSplitOptions.RemoveEmptyEntries);
+        
+        var ruleSets = input[0].Split("\n");
+        var updates = input[1].Split("\n", StringSplitOptions.RemoveEmptyEntries);
         
         Dictionary<int, List<int>> rules = [];
         foreach (var ruleSet in ruleSets)

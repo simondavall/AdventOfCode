@@ -5,14 +5,9 @@ internal static class Program
 {
     internal static void Main()
     {
-        const string filename = "input.txt";
-        const string aocDay = "13";
-        const string aocYear = "2024";
-        const string path = $"/home/sdv/Documents/Projects/Aoc/{aocYear}/{aocDay}/";
-
-        var map = File.ReadAllText($"{path}{filename}");
-
-        var machines = map.Split("\n\n").ToMachineList();
+        var machines = File.ReadAllText("input.txt")
+            .Split("\n\n", StringSplitOptions.RemoveEmptyEntries)
+            .ToMachineList();
         
         Console.WriteLine($"Part 1: {PartOne(machines)}");
         Console.WriteLine($"Part 2: {PartTwo(machines)}");

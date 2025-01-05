@@ -5,15 +5,12 @@ internal class Program
 {
     private static int Main()
     {
-        const string aocDay = "01";
-        const string filename = "input.txt";
-        const string path = $"/home/sdv/Documents/Projects/Aoc/2024/{aocDay}/";
-        var lines = File.ReadLines($"{path}{filename}").ToArray();
+        var input = File.ReadAllText("input.txt").Split("\n", StringSplitOptions.RemoveEmptyEntries);
 
         List<int> firstList = [];
         List<int> secondList = [];
         
-        foreach (var line in lines)
+        foreach (var line in input)
         {
             var pair = line.Split("   ");
             firstList.Add(int.Parse(pair[0]));

@@ -6,12 +6,9 @@ internal static class Program
 
     internal static void Main()
     {
-        const string aocDay = "09";
-        const string filename = "input.txt";
-        const string path = $"/home/sdv/Documents/Projects/Aoc/2024/{aocDay}/";
-        var map = File.ReadAllBytes($"{path}{filename}").ToArray();
+        var input = File.ReadAllBytes("input.txt");
         
-        _mapHeight = map.Length;
+        _mapHeight = input.Length;
 
         List<int> files = [];
         List<int> space = [];
@@ -20,11 +17,11 @@ internal static class Program
         {
             if (i % 2 == 0)
             {
-                files.Add(map[i] - '0');
+                files.Add(input[i] - '0');
                 continue;
             }
 
-            space.Add(map[i] - '0');
+            space.Add(input[i] - '0');
         }
         
         Console.WriteLine($"Part 1: {PartOne(files, space)}");
