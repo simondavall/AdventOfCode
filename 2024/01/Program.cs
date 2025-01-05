@@ -1,9 +1,8 @@
-﻿// ReSharper disable ClassNeverInstantiated.Global
-namespace _01;
+﻿namespace _01;
 
-internal class Program
+internal static class Program
 {
-    private static int Main()
+    private static void Main()
     {
         var input = File.ReadAllText("input.txt").Split("\n", StringSplitOptions.RemoveEmptyEntries);
 
@@ -12,15 +11,13 @@ internal class Program
         
         foreach (var line in input)
         {
-            var pair = line.Split("   ");
+            var pair = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
             firstList.Add(int.Parse(pair[0]));
             secondList.Add(int.Parse(pair[1]));
         }
 
         Console.WriteLine($"Part 1: {PartOne(firstList, secondList)}");
-
         Console.WriteLine($"Part 2: {PartTwo(firstList, secondList)}");
-        return 0;
     }
     
     private static long PartOne(List<int> firstList, List<int> secondList)
@@ -28,13 +25,7 @@ internal class Program
         firstList.Sort();
         secondList.Sort();
 
-        long tally = 0;
-        for (var i = 0; i < firstList.Count; i++)
-        {
-            tally += long.Abs(firstList[i] - secondList[i]);
-        }
-        
-        return tally;
+        return firstList.Select((t, i) => long.Abs(t - secondList[i])).Sum();
     }
     
     private static long PartTwo(List<int> firstList, List<int> secondList)
@@ -42,8 +33,7 @@ internal class Program
         long tally = 0; 
         foreach (var locationId in firstList)
         {
-            var count = secondList.Count(x => x == locationId);
-            tally += locationId * count;
+            tally += locationId * secondList.Count(x => x == locationId);
         }
 
         return tally;
