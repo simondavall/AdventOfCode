@@ -1,10 +1,8 @@
-﻿// ReSharper disable ClassNeverInstantiated.Global
-using System.Text.RegularExpressions;
-
+﻿using System.Text.RegularExpressions;
 
 namespace _03;
 
-internal partial class Program
+internal static partial class Program
 {
     internal static void Main()
     {
