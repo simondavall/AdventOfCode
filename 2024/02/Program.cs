@@ -1,16 +1,14 @@
-﻿// ReSharper disable ClassNeverInstantiated.Global
-namespace _02;
+﻿namespace _02;
 
-internal class Program
+internal static class Program
 {
     private static bool _isLevelIncreasing;
 
     internal static void Main()
     {
-        var input = File.ReadAllText("input.txt").Split("\n", StringSplitOptions.RemoveEmptyEntries);
+        var input = File.ReadAllText("input.txt").Split('\n', StringSplitOptions.RemoveEmptyEntries);
         
         Console.WriteLine($"Part 1: {PartOne(input)}");
-
         Console.WriteLine($"Part 2: {PartTwo(input.ToList())}");
     }
     
@@ -19,7 +17,7 @@ internal class Program
         long tally = 0;
         foreach (var report in reports)
         {
-            var levels = report.Split(" ").Select(int.Parse).ToList();
+            var levels = report.Split(' ').Select(int.Parse).ToList();
             tally += IsReportSafe(levels) ? 1 : 0;
         }
         
@@ -32,7 +30,7 @@ internal class Program
 
         foreach (var report in reports)
         {
-            var levels = report.Split(" ").Select(int.Parse).ToList();
+            var levels = report.Split(' ').Select(int.Parse).ToList();
             if (IsReportSafe(levels))
             {
                 tally++;
@@ -44,7 +42,9 @@ internal class Program
                 List<int> amendedLevels = [];
                 amendedLevels.AddRange(levels.Where((_, j) => i != j));
 
-                if (!IsReportSafe(amendedLevels)) continue;
+                if (!IsReportSafe(amendedLevels))
+                    continue;
+                
                 tally++;
                 break;
             }
@@ -56,13 +56,13 @@ internal class Program
     private static bool IsReportSafe(List<int> levels)
     {
         _isLevelIncreasing = levels[0] > levels[1];
-        for (var l = 0; l < levels.Count; l++)
+        foreach (var _ in levels)
         {
-            for (var i = 1; i < levels.Count; i++)
+            for (var j = 1; j < levels.Count; j++)
             {
-                if (levels[i - 1] > levels[i] != _isLevelIncreasing
-                    || levels[i - 1] == levels[i]
-                    || int.Abs(levels[i - 1] - levels[i]) > 3)
+                if (levels[j - 1] > levels[j] != _isLevelIncreasing
+                    || levels[j - 1] == levels[j]
+                    || int.Abs(levels[j - 1] - levels[j]) > 3)
                     return false;
             }
         }
