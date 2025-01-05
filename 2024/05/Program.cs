@@ -1,8 +1,6 @@
-﻿// ReSharper disable ClassNeverInstantiated.Global
+﻿namespace _05;
 
-namespace _05;
-
-internal static class Program
+internal static partial class Program
 {
     private static readonly List<int[]> FailedSets = [];
     
@@ -10,29 +8,23 @@ internal static class Program
     {
         var input = File.ReadAllText("input.txt").Split("\n\n", StringSplitOptions.RemoveEmptyEntries);
         
-        var ruleSets = input[0].Split("\n");
-        var updates = input[1].Split("\n", StringSplitOptions.RemoveEmptyEntries);
+        var ruleSets = input[0].Split('\n', StringSplitOptions.RemoveEmptyEntries);
+        var updates = input[1].Split('\n', StringSplitOptions.RemoveEmptyEntries);
         
         Dictionary<int, List<int>> rules = [];
         foreach (var ruleSet in ruleSets)
         {
-            var rule = ruleSet.Split("|").ToIntArray();
-            var key = rule[0];
-            var value = rule[1];
-            if (rules.TryGetValue(key, out var values))
-            {
-                values.Add(value);
-                continue;
-            }
-            
-            rules.Add(key, [value]);
+            var key = ruleSet[..2].ToInt();
+            var value = ruleSet[3..].ToInt();
+            if (!rules.TryAdd(key, [value]))
+                rules[key].Add(value);
         }
 
         List<int[]> pageSets = [];
         pageSets.AddRange(updates.Select(update => update.Split(",").ToIntArray()));
 
         Console.WriteLine($"Part 1: {PartOne(rules, pageSets)}");
-        Console.WriteLine($"Part 2: {PartTwo(rules, pageSets)}");
+        Console.WriteLine($"Part 2: {PartTwo(rules)}");
     }
 
     private static long PartOne(Dictionary<int, List<int>> rules, List<int[]> pageSets)
@@ -44,22 +36,20 @@ internal static class Program
             var pageCount = pages.Length;
             var currentPage = 0;
             var isValid = true;
-            while (currentPage < pageCount - 1)
+            while (currentPage < pageCount - 1 && isValid)
             {
                 for (var i = currentPage + 1; i < pageCount; i++)
                 {
-                    if (!SatisfiesRules(rules, pages[currentPage], pages[i]))
-                    {
-                        FailedSets.Add(pages);
-                        isValid = false;
-                        break;
-                    }
+                    if (SatisfiesRules(rules, pages[currentPage], pages[i])) 
+                        continue;
+                    
+                    FailedSets.Add(pages);
+                    isValid = false;
+                    break;
                 }
 
-                if (!isValid)
-                    break;
-                
-                currentPage++;
+                if (isValid)
+                    currentPage++;
             }
 
             if (isValid)
@@ -69,7 +59,7 @@ internal static class Program
         return tally;
     }
     
-    private static long PartTwo(Dictionary<int, List<int>> rules, List<int[]> pageSets)
+    private static long PartTwo(Dictionary<int, List<int>> rules)
     {
         long tally = 0;
 
@@ -82,12 +72,12 @@ internal static class Program
             {
                 for (var i = currentPage + 1; i < pageCount; i++)
                 {
-                    if (!SatisfiesRules(rules, pages[currentPage], pages[i]))
-                    {
-                        (pages[i], pages[currentPage]) = (pages[currentPage], pages[i]);
-                        // reset and start pageSet again
-                        currentPage = 0;
-                    }
+                    if (SatisfiesRules(rules, pages[currentPage], pages[i])) 
+                        continue;
+                    
+                    (pages[i], pages[currentPage]) = (pages[currentPage], pages[i]);
+                    // reset and start pageSet again
+                    currentPage = 0;
                 }
                 
                 currentPage++;
@@ -102,16 +92,5 @@ internal static class Program
     private static bool SatisfiesRules(Dictionary<int, List<int>> orderings, int first, int second)
     {
         return !orderings.TryGetValue(second, out var value) || !value.Contains(first);
-    }
-
-    private static int[] ToIntArray(this string[] array)
-    {
-        var intArray = new int[array.Length];
-        for (var i = 0; i < array.Length; i++)
-        {
-            intArray[i] = int.Parse(array[i]);
-        }
-
-        return intArray;
     }
 }
