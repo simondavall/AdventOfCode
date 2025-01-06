@@ -8,7 +8,7 @@ internal static class Program
 
     internal static void Main()
     {
-        var map = File.ReadAllText("input.txt").Split("\n", StringSplitOptions.RemoveEmptyEntries);
+        var map = File.ReadAllText("input.txt").Split('\n', StringSplitOptions.RemoveEmptyEntries);
         
         _mapHeight = map.Length;
 
