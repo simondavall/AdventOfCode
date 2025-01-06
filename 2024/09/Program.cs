@@ -46,15 +46,10 @@ internal static class Program
             if (isForward)
             {
                 for (var j = 0; j < files[forwardIndex]; j++)
-                {
                     if (index < totalFileSize)
-                    {
                         tally += index++ * forwardIndex;
-                    }
-                }
 
                 forwardIndex++;
-                isForward = false;
             }
             else
             {
@@ -65,13 +60,11 @@ internal static class Program
                     tally += index++ * lastFileIndex;
                     
                     if (--currentEndFileSize <= 0)
-                    {
                         currentEndFileSize = files[--lastFileIndex];
-                    }
                 }
-
-                isForward = true;
             }
+
+            isForward = !isForward;
         }
         
         return tally;
@@ -118,9 +111,7 @@ internal static class Program
         for (var i = 0; i < filesInfo.Count; i++)
         {
             for (var j = 0; j < filesInfo[i].size; j++)
-            {
                 tally += filesInfo[i].id * index++;
-            }
 
             index += space[i];
         }
