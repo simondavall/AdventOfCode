@@ -150,9 +150,10 @@ internal static class Program
         
         if (depth == 1)
         {
-            length = ('A' + sequence)
-                .Zip(sequence)
-                .Aggregate(length, (current, x) => (long)(current + DirectionalSequenceLengths[(x.First, x.Second)]));
+            foreach (var (first, second) in ('A' + sequence).Zip(sequence))
+            {
+                length += DirectionalSequenceLengths[(first, second)];
+            }
 
             CachedLengths[(sequence, depth)] = length;
             
@@ -163,7 +164,6 @@ internal static class Program
         {
             var min = _directionalSequences[(from, to)]
                 .Select(subSequence => ComputeLength(subSequence, depth - 1))
-                .Prepend(long.MaxValue)
                 .Min();
 
             length += min;
@@ -193,13 +193,9 @@ internal static class Program
             {
                 var newArray = output.Select(str => str + nextStr).ToList();
                 if (index++ == 0)
-                {
                     tempArray = newArray;
-                }
                 else
-                {
                     tempArray.AddRange(newArray);
-                }
             }
             output = tempArray;
         }
