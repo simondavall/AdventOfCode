@@ -1,37 +1,29 @@
-﻿using System.Diagnostics;
+﻿namespace _06;
 
-namespace _06;
-
-internal static class Program
+internal static partial class Program
 {
-    private static char[,] _charMap = null!;
-    private static int _mapWidth;
-    private static int _mapHeight;
-    private static readonly List<(int row, int col)> PreviouslyVisited = [];
-    private static (int row, int col) _initialPosition = (0, 0);
-    private static Direction _initialDirection = Direction.Down;
+    private static char[][] _map = null!;
+    private static short _mapWidth;
+    private static short _mapHeight;
+    private static readonly Dictionary<(short row, short col), (short deltaRow, short deltaCol)> Visited = [];
+    private static (short row, short col) _initialPosition = (0, 0);
     
     internal static void Main()
     {
-        var map = File.ReadAllText("input.txt").Split("\n", StringSplitOptions.RemoveEmptyEntries);
+        var input = File.ReadAllText("input.txt").Split('\n', StringSplitOptions.RemoveEmptyEntries);
         
-        _mapWidth = map[0].Length;
-        _mapHeight = map.Length;
+        _mapWidth = (short)input[0].Length;
+        _mapHeight = (short)input.Length;
 
-        _charMap = new char[_mapHeight, _mapWidth];
-        for (var i = 0; i < _mapHeight; i++)
-            for (var j = 0; j < _mapWidth; j++)
-            {
-                _charMap[i, j] = map[i][j];
-            }
+        _map = new char[_mapHeight][];
+        for (short i = 0; i < _mapHeight; i++)
+            _map[i] = input[i].ToCharArray();
 
-        for (var i = 0; i < _mapHeight; i++)
+        for (short i = 0; i < _mapHeight; i++)
         {
-            var j = map[i].IndexOfAny(['^', '>', '<', 'V']);
-            if (j <= -1) continue;
-            _initialPosition = (i, j);
-            _initialDirection = GetDirection(map[i][j]);
-            break;
+            if (input[i].IndexOf('^') == -1)
+                continue;
+            _initialPosition = (i, (short)input[i].IndexOf('^'));
         }
         
         Console.WriteLine($"Part 1: {PartOne()}");
@@ -40,111 +32,90 @@ internal static class Program
 
     private static long PartOne()
     {
-        long tally = 1;
+        var row = _initialPosition.row;
+        var col = _initialPosition.col;
+        short deltaRow = -1;
+        short deltaCol = 0;
         
-        var guardPosition = _initialPosition;
-        var guardDirection = _initialDirection;
-        
-        PreviouslyVisited.Add(guardPosition);
-        
-        while(GuardMove(ref guardPosition, ref guardDirection))
+        while (true)
         {
-            if (!PreviouslyVisited.Contains(guardPosition))
+            Visited.TryAdd((row, col), (deltaRow, deltaCol));
+            (short row, short col) nextPosition = ((short)(row + deltaRow), (short)(col + deltaCol));
+            if (!IsInBounds(nextPosition))
+                break;
+            if (_map[nextPosition.row][nextPosition.col] == '#')
+                (deltaCol, deltaRow) = ((short)-deltaRow, deltaCol);
+            else
             {
-                PreviouslyVisited.Add(guardPosition);
-                tally++;
+                row += deltaRow;
+                col += deltaCol;
             }
         }
-        
-        return tally;
+        return Visited.Count;
     }
 
+    private static readonly List<(short row, short col, short deltaRow, short deltaCol)> Revisited = [];
+    
     private static long PartTwo()
     {
+        var row = _initialPosition.row;
+        var col = _initialPosition.col;
+        short deltaRow = -1;
+        short deltaCol = 0;
+
         long tally = 0;
         
-        foreach (var visitedPosition in PreviouslyVisited)
+        Revisited.Add((row, col, deltaRow, deltaCol));
+        
+        foreach (var ((nextRow, nextCol), (nextDeltaRow, nextDeltaCol)) in Visited)
         {
-            if (visitedPosition == _initialPosition)
+            if ((row, col) == (nextRow, nextCol))
                 continue;
-            
-            var guardPosition = _initialPosition;
-            var guardDirection = _initialDirection;
-            List<(int row, int col, Direction direction)> previouslyVisited = [(guardPosition.row, guardPosition.col, guardDirection)];
-            
-            _charMap[visitedPosition.row, visitedPosition.col] = '#';
-            
-            while(GuardMove(ref guardPosition, ref guardDirection))
+
+            _map[nextRow][nextCol] = '#';
+            if (HasInfiniteLoop(row, col, deltaRow, deltaCol))
             {
-                if (previouslyVisited.Contains((guardPosition.row, guardPosition.col, guardDirection)))
-                {
-                    tally++;
-                    break;
-                }
-                
-                previouslyVisited.Add((guardPosition.row, guardPosition.col, guardDirection));
+                tally++;
             }
-            
-            _charMap[visitedPosition.row, visitedPosition.col] = '.';
+
+            _map[nextRow][nextCol] = '.';
+            (row, col, deltaRow, deltaCol) = (nextRow, nextCol, nextDeltaRow, nextDeltaCol);
+            Revisited.Add((row, col, deltaRow, deltaCol));
         }
         
         return tally;
     }
 
-    private static bool GuardMove(ref (int row, int col) guardPosition, ref Direction guardDirection)
+    private static readonly HashSet<(short row, short col, short deltaRow, short deltaCol)> NewVisited = [];
+    
+    private static bool HasInfiniteLoop(short row, short col, short deltaRow, short deltaCol)
     {
-        var row = guardPosition.row;
-        var col = guardPosition.col;
+        NewVisited.Clear();
         
-        switch (guardDirection)
+        while (true)
         {
-            case Direction.Up: row--; break;
-            case Direction.Down: row++; break;
-            case Direction.Right: col++; break;
-            case Direction.Left: col--; break;
-            default: throw new UnreachableException();
-        }
+            NewVisited.Add((row, col, deltaRow, deltaCol));
+            (short row, short col) nextPosition = ((short)(row + deltaRow), (short)(col + deltaCol));
+            if (!IsInBounds(nextPosition))
+                return false;
+            if (_map[nextPosition.row][nextPosition.col] == '#')
+                (deltaCol, deltaRow) = ((short)-deltaRow, deltaCol);
+            else
+            {
+                row += deltaRow;
+                col += deltaCol;
+            }
 
-        if (!IsGuardOnMap((row, col)))
-        {
-            return false;
+            if (Revisited.Contains((row, col, deltaRow, deltaCol)) || NewVisited.Contains((row, col, deltaRow, deltaCol)))
+                return true;
         }
-        
-        if (_charMap[row, col] == '#')
-        {
-            guardDirection = (Direction)((int)++guardDirection % 4);
-            return GuardMove(ref guardPosition, ref guardDirection);
-        }
-
-        guardPosition = (row, col);
-        return true;
     }
     
-    private static bool IsGuardOnMap((int row, int col) guardPosition)
+    private static bool IsInBounds((short row, short col) position)
     {
-        return guardPosition.row >= 0
-               && guardPosition.row < _mapHeight
-               && guardPosition.col >= 0
-               && guardPosition.col < _mapWidth;
-    }
-    
-    private static Direction GetDirection(char c)
-    {
-        return c switch
-        {
-            '^' => Direction.Up,
-            '>' => Direction.Right,
-            'V' => Direction.Down,
-            '<' => Direction.Left,
-            _ => throw new InvalidCastException(c.ToString())
-        };
-    }
-    
-    private enum Direction
-    {
-        Up,
-        Right,
-        Down,
-        Left
+        return position.row >= 0
+               && position.row < _mapHeight
+               && position.col >= 0
+               && position.col < _mapWidth;
     }
 }
