@@ -1,4 +1,5 @@
 ﻿<Solution>
   <Project Path="17\17.csproj" Type="Classic C#" />
   <Project Path="18\18.csproj" Type="Classic C#" />
+  <Project Path="19\19.csproj" Type="Classic C#" />
 </Solution>
