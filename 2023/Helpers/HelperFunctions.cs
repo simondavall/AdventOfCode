@@ -1,4 +1,4 @@
-namespace _19;
+namespace Helpers;
 
 internal static partial class Program
 {

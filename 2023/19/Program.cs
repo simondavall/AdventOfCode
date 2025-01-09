@@ -16,7 +16,7 @@ internal static partial class Program
             var item = line.Split('{');
             var name = item[0];
             var rules = new FlexStack<string>(item[1][..^1].Split(','));
-            Workflows[name] = ([], rules.PopRight());
+            Workflows[name] = ([], rules.PopBottom());
             while (!rules.IsEmpty())
             {
                 var rule = rules.Pop();
