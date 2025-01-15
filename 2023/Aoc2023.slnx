@@ -7,4 +7,5 @@
   <Project Path="22\22.csproj" Type="Classic C#" />
   <Project Path="23\23.csproj" Type="Classic C#" />
   <Project Path="24\24.csproj" Type="Classic C#" />
+  <Project Path="25\25.csproj" Type="Classic C#" />
 </Solution>

@@ -1,4 +1,4 @@
-namespace Helpers;
+namespace _25;
 
 internal static partial class Program
 {
@@ -24,7 +24,7 @@ internal static partial class Program
 
         throw new InvalidCastException($"Not a valid integer: {str}");
     }
-    
+
     private static long ToLong(this string str)
     {
         if (long.TryParse(str, out var value))
@@ -32,7 +32,7 @@ internal static partial class Program
 
         throw new InvalidCastException($"Not a valid integer: {str}");
     }
-    
+
     private static int[] ToIntArray(this string[] array)
     {
         var intArray = new int[array.Length];
@@ -43,7 +43,7 @@ internal static partial class Program
 
         return intArray;
     }
-    
+
     private static long[] ToLongArray(this string[] array)
     {
         var longArray = new long[array.Length];
@@ -54,7 +54,7 @@ internal static partial class Program
 
         return longArray;
     }
-    
+        
     private static char[][] ToCharArray(this string[] array)
     {
         var charArr = new char[array.Length][];
