@@ -24,7 +24,7 @@ internal static class Aoc
                                                            // will not have been started yet. So skip failed finds.
             var type = assembly.GetTypes().First(x => x.Name.Contains("Program"));
             var main = type.GetMethod("Main");
-            var current = (int)main?.Invoke(null, [new[]{"",$"input{assemblyName}.txt"}])!;
+            var current = (int)main?.Invoke(null, [new[]{"",$"input_{assemblyName}.txt"}])!;
             
             Console.WriteLine(current != 0 ? "Oops, Failed!!!" : "Success");
             result += current;
