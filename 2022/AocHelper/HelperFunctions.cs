@@ -76,14 +76,26 @@ public static class Helper
         };
     }
 
+    public static (int first, int second, int third) ToIntTupleTriple(this string[] array)
+    {
+        return array.Length switch
+        {
+            > 3 => throw new ArgumentException(
+                $" Too many array members.{array.Length} This method requires an array of length 3."),
+            < 3 => throw new ArgumentException(
+                $" Too few array members.{array.Length} This method requires an array of length 3."),
+            _ => (array[0].ToInt(), array[1].ToInt(), array[2].ToInt())
+        };
+    }
+    
     public static (long first, long second, long third) ToLongTupleTriple(this string[] array)
     {
         return array.Length switch
         {
             > 3 => throw new ArgumentException(
-                $" Too many array members.{array.Length} This method requires an array of length 2."),
+                $" Too many array members.{array.Length} This method requires an array of length 3."),
             < 3 => throw new ArgumentException(
-                $" Too few array members.{array.Length} This method requires an array of length 2."),
+                $" Too few array members.{array.Length} This method requires an array of length 3."),
             _ => (array[0].ToLong(), array[1].ToLong(), array[2].ToLong())
         };
     }
