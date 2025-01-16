@@ -9,7 +9,7 @@ internal static class Program
     
     public static int Main(string[] args)
     {
-        var filename = "input01.txt";
+        var filename = "input_01.txt";
         if (args.Length > 1 && !string.IsNullOrWhiteSpace(args[1]))
             filename = args[1];
         

@@ -9,11 +9,11 @@
         <LangVersion>13</LangVersion>
     </PropertyGroup>
     <ItemGroup>
-        <None Update="input01.txt">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <None Update="input_01.txt">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
         <None Update="sample.txt">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
     </ItemGroup>
     <ItemGroup>
