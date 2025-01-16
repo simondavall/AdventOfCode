@@ -33,7 +33,7 @@ internal static class Program
     
     public static int Main(string[] args)
     {
-        var filename = "input02.txt";
+        var filename = "input_02.txt";
         if (args.Length > 1 && !string.IsNullOrWhiteSpace(args[1]))
             filename = args[1];
         

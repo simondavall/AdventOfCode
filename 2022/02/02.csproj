@@ -9,7 +9,7 @@
         <LangVersion>13</LangVersion>
     </PropertyGroup>
     <ItemGroup>
-        <None Update="input02.txt">
+        <None Update="input_02.txt">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
         <None Update="sample.txt">
