@@ -32,9 +32,7 @@ internal static partial class Program
     {
         const string filename = "input.txt";
         var input = File.ReadAllText($"{filename}").Split('\n', StringSplitOptions.RemoveEmptyEntries);
-
         
-
         Console.WriteLine($"Part 1: {PartOne(input)}");
         Console.WriteLine($"Part 2: {PartTwo(input)}");
     }
