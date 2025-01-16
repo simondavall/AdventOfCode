@@ -1,3 +1,4 @@
 ﻿<Solution>
   <Project Path="01\01.csproj" Type="Classic C#" />
+  <Project Path="02\02.csproj" Type="Classic C#" />
 </Solution>
