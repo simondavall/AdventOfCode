@@ -1,7 +1,10 @@
 ﻿namespace _02;
 
-internal static partial class Program
-{
+internal static class Program
+{    
+    private const long ExpectedPartOne = 13268;
+    private const long ExpectedPartTwo = 15508;
+    private const string Day = "02";
     private static readonly Dictionary<(char, char), int> Outcomes = new()
     {
         { ('A', 'X'), 4 },
@@ -28,13 +31,20 @@ internal static partial class Program
         { ('C', 'Z'), 7 },
     };
     
-    internal static void Main()
+    public static int Main(string[] args)
     {
-        const string filename = "input.txt";
+        var filename = "input02.txt";
+        if (args.Length > 1 && !string.IsNullOrWhiteSpace(args[1]))
+            filename = args[1];
+        
         var input = File.ReadAllText($"{filename}").Split('\n', StringSplitOptions.RemoveEmptyEntries);
         
-        Console.WriteLine($"Part 1: {PartOne(input)}");
-        Console.WriteLine($"Part 2: {PartTwo(input)}");
+        var resultPartOne = PartOne(input);
+        Console.WriteLine($"Day{Day} Part 1: {resultPartOne}");
+        var resultPartTwo = PartTwo(input);
+        Console.WriteLine($"Day{Day} Part 2: {resultPartTwo}");
+        
+        return resultPartOne == ExpectedPartOne && resultPartTwo == ExpectedPartTwo ? 0 : 1;
     }
 
     private static long PartOne(string [] gamePlays)

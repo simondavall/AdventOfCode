@@ -1,23 +1,23 @@
-namespace _01;
+namespace AocHelper;
 
-internal static partial class Program
+public static class Helper
 {
-    private static List<T> List<T>(List<T> list)
+    public static List<T> List<T>(List<T> list)
     {
         return list;
     }
 
-    private static IEnumerable<int> Range(int n)
+    public static IEnumerable<int> Range(int n)
     {
         return Enumerable.Range(0, n);
     }
 
-    private static IEnumerable<int> Range(int start, int n)
+    public static IEnumerable<int> Range(int start, int n)
     {
         return Enumerable.Range(start, n);
     }
 
-    private static int ToInt(this string str)
+    public static int ToInt(this string str)
     {
         if (int.TryParse(str, out var value))
             return value;
@@ -25,7 +25,7 @@ internal static partial class Program
         throw new InvalidCastException($"Not a valid integer: {str}");
     }
 
-    private static long ToLong(this string str)
+    public static long ToLong(this string str)
     {
         if (long.TryParse(str, out var value))
             return value;
@@ -33,7 +33,7 @@ internal static partial class Program
         throw new InvalidCastException($"Not a valid integer: {str}");
     }
 
-    private static int[] ToIntArray(this string[] array)
+    public static int[] ToIntArray(this string[] array)
     {
         var intArray = new int[array.Length];
         for (var i = 0; i < array.Length; i++)
@@ -44,7 +44,7 @@ internal static partial class Program
         return intArray;
     }
 
-    private static long[] ToLongArray(this string[] array)
+    public static long[] ToLongArray(this string[] array)
     {
         var longArray = new long[array.Length];
         for (var i = 0; i < array.Length; i++)
@@ -55,7 +55,7 @@ internal static partial class Program
         return longArray;
     }
 
-    private static char[][] ToCharArray(this string[] array)
+    public static char[][] ToCharArray(this string[] array)
     {
         var charArr = new char[array.Length][];
         for (var i = 0; i < array.Length; i++)
@@ -64,7 +64,7 @@ internal static partial class Program
         return charArr;
     }
 
-    private static (T first, T second) ToTuplePair<T>(this T[] array)
+    public static (T first, T second) ToTuplePair<T>(this T[] array)
     {
         return array.Length switch
         {
@@ -76,7 +76,7 @@ internal static partial class Program
         };
     }
 
-    private static (long first, long second, long third) ToLongTupleTriple(this string[] array)
+    public static (long first, long second, long third) ToLongTupleTriple(this string[] array)
     {
         return array.Length switch
         {
@@ -88,20 +88,20 @@ internal static partial class Program
         };
     }
 
-    private static List<T> ToSortedList<T>(this HashSet<T> set)
+    public static List<T> ToSortedList<T>(this HashSet<T> set)
     {
         var list = set.ToList();
         list.Sort();
         return list;
     }
 
-    private static List<T> Sorted<T>(this List<T> list)
+    public static List<T> Sorted<T>(this List<T> list)
     {
         list.Sort();
         return list;
     }
-    
-    private static List<T> SortedDesc<T>(this List<T> list)
+
+    public static List<T> SortedDesc<T>(this List<T> list)
     {
         return list.OrderDescending().ToList();
     }

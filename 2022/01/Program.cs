@@ -1,10 +1,18 @@
-﻿namespace _01;
+﻿using AocHelper;
+namespace _01;
 
-internal static partial class Program
+internal static class Program
 {
-    internal static void Main()
+    private const long ExpectedPartOne = 72602;
+    private const long ExpectedPartTwo = 207410;
+    private const string Day = "01";
+    
+    public static int Main(string[] args)
     {
-        const string filename = "input.txt";
+        var filename = "input01.txt";
+        if (args.Length > 1 && !string.IsNullOrWhiteSpace(args[1]))
+            filename = args[1];
+        
         var blocks = File.ReadAllText($"{filename}").Split("\n\n", StringSplitOptions.RemoveEmptyEntries);
 
         List<int[]> elves = [];
@@ -12,11 +20,15 @@ internal static partial class Program
         {
             elves.Add(block.Split('\n', StringSplitOptions.RemoveEmptyEntries).ToIntArray());
         }
-        
-        Console.WriteLine($"Part 1: {PartOne(elves)}");
-        Console.WriteLine($"Part 2: {PartTwo(elves)}");
-    }
 
+        var resultPartOne = PartOne(elves);
+        Console.WriteLine($"Day{Day} Part 1: {resultPartOne}");
+        var resultPartTwo = PartTwo(elves);
+        Console.WriteLine($"Day{Day} Part 2: {resultPartTwo}");
+        
+        return resultPartOne == ExpectedPartOne && resultPartTwo == ExpectedPartTwo ? 0 : 1;
+    }
+    
     private static long PartOne(List<int[]> elves)
     {
         long tally = 0;
