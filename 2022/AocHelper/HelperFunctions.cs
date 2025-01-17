@@ -63,6 +63,21 @@ public static class Helper
 
         return charArr;
     }
+    
+    public static int[][] To2DIntArray(this string[] array)
+    {
+        var intArr = new int[array.Length][];
+        for (var i = 0; i < array.Length; i++)
+        {
+            intArr[i] = new int[array[i].Length];
+            for (var j = 0; j < array[i].Length; j++)
+            {
+                intArr[i][j] = array[i][j] - '0';
+            }
+        }
+
+        return intArr;
+    }
 
     public static (T first, T second) ToTuplePair<T>(this T[] array)
     {
