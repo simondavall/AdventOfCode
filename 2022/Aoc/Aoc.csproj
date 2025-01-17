@@ -17,5 +17,6 @@
       <ProjectReference Include="..\06\06.csproj" />
       <ProjectReference Include="..\07\07.csproj" />
       <ProjectReference Include="..\08\08.csproj" />
+      <ProjectReference Include="..\09\09.csproj" />
     </ItemGroup>
 </Project>
