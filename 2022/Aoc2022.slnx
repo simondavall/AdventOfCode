@@ -5,6 +5,7 @@
   <Project Path="04\04.csproj" Type="Classic C#" />
   <Project Path="05\05.csproj" Type="Classic C#" />
   <Project Path="06\06.csproj" Type="Classic C#" />
+  <Project Path="07\07.csproj" Type="Classic C#" />
   <Project Path="AocHelper\AocHelper.csproj" Type="Classic C#" />
   <Project Path="Aoc\Aoc.csproj" Type="Classic C#" />
 </Solution>
